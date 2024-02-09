@@ -1,0 +1,66 @@
+{
+  "name": "CoWorkers",
+  "displayName": "CoWorkers",
+  "description": "CoWorkers is a VSCode extension that provides inline completions using Cloudflare Workers AI.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "CoWorkers",
+      "properties": {
+        "CoWorkers.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable CoWorkers autocompletion. Reload workspace to apply."
+        },
+        "CoWorkers.enablePopup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable popup messages when beginning infill & showing suggestions. Reload workspace to apply."
+        },
+        "CoWorkers.accountId": {
+          "type": "string",
+          "default": "",
+          "description": "Your Cloudflare account ID. https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/"
+        },
+        "CoWorkers.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Workers AI API token. https://developers.cloudflare.com/workers-ai/get-started/rest-api/"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "debounce": "^2.0.0",
+    "llama-tokenizer-js": "^1.1.3"
+  }
+}
