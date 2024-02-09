@@ -52,9 +52,14 @@ export function activate(context: vscode.ExtensionContext) {
 			const prefix = text.substring(0, offset);
 			const suffix = text.substring(offset);
 			const infill = await ai.infill(prefix, suffix);
-			
-			if(config.get<boolean>("enablePopup"))
-				vscode.window.showInformationMessage("CoWorkers: generated " + infill.length + " suggestions");
+
+			if(config.get<boolean>("enablePopup")){
+				let nonEmptyCount = 0;
+				for(const item of infill){
+					if(item.length) nonEmptyCount++;
+				}
+				vscode.window.showInformationMessage("CoWorkers: generated " + nonEmptyCount + " suggestions");
+			}
 			const res: vscode.InlineCompletionList = {
 				"items": infill.map(a => new vscode.InlineCompletionItem(a))
 			};
